@@ -7,52 +7,83 @@
 
 
 ## Background.
-The United States Geological Survey, or USGS for short, is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment, and the impacts of climate and land-use change.
-Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes.
-The USGS is interested in building a new set of tools that will allow them to visualize their earthquake data.
-They collect a massive amount of data from all over the world each day, but they lack a meaningful way of displaying it.
-In this challenge, you have been tasked with developing a way to visualize USGS data that will allow them to better educate the public and other government organizations (and hopefully secure more funding) on issues facing our planet.
+This project transforms any standard RGB image into a pencil sketch using Python's OpenCV library. 
+It was originally designed as an assignment for the LGM Data Science Virtual Internship but has been expanded into a full-fledged web application with Flask.
 
-## Data sources.
-- [The United States Geological Survey](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson)
-- [Tectonic Plates](https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json)
+## Folder Structure
+<div align="center">
+	<img src="/image-sketch-app/images/filestructure.png">
+</div>
 
-## Tools and libraries used
-- [D3.js](https://d3js.org/d3.v7.min.js)
-- [Leaflet CSS](https://unpkg.com/leaflet@1.9.4/dist/leaflet.css)
-- [Leaflet JavaScript](https://unpkg.com/leaflet@1.9.4/dist/leaflet.css)
-
-## Activities. 
-- [Leaflet-Part-1.](Leaflet-Part-1/static/js/logic.js)
-  - [Create the street map tile layer that will be the background of our map.](https://www.openstreetmap.org) 
-  - Create a baseMaps object to hold the street map layer.
-  - Create legend control ti display the color code as per the magnitude.
-  - Create functions that returns the size of the marker and color codes according to the magnitude.
-  - sample_values - Value of the bacteria found in the sample.
-  - Create creatEqMap function to plot the earthquake markers.
-  - Create createEQMarkers function that create the marker group.
-  - Import data from the website and calling the functions to deploy the map.  
-- [Leaflet-Part-2.](Leaflet-Part-2/static/js/logic.js)
-  - [Create the satellite map tile layer that will be the background of our map.](http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}) 
-  - [Create topo layer.](https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png)
-  - [Creat outdoor layer.](https://www.openstreetmap.org/copyright)
-  - Create a baseMaps object to hold the three views layers.
-  - Create legend control ti display the color code as per the magnitude.
-  - Create functions that returns the size of the marker and color codes according to the magnitude.
-  - sample_values - Value of the bacteria found in the sample.
-  - Create creatEqMap function to plot the earthquake markers.
-  - Create createEQMarkers function that create the marker group.
-  - Import data from the website and calling the functions to deploy the map.  
+## Software & Dependencies
+- Prerequisites
+  - Python 3.7+
+  - pip (Python package manager)
   
+## Required Libraries
+- Install dependencies using (bash):
+  - pip install -r requirements.txt
 
-## Functions.
-- markerSize  : This function accept the magnitude of the earthquake and return the size of the marker accordingly.
-- markerColor : This function accept the depth of the earthquake and return the marker color.
-- creatEqMap  : This function create the base map accepting one argument (layer group).
-- createEQMarkers : This function create the markers and the layer group and pass it to create the map.
+## The conversion process.
+- Grayscale conversion
+- Image inversion (negative effect)
+- Gaussian blurring
+- Blending techniques to create the final sketch effect
 
-## How to run the code.
-- Create a new folder in your local machine.
-- Download both Leaflet-Part-1 and the Leaflet-Part-2 folders from the GitHub.
-- [Open the newly created folder by using VS code.](https://visualstudio.microsoft.com/downloads/)
-- [Run the index.html by open with live server ](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+## Backend Python File (app.py) Overview
+This Flask-based server handles the image upload, processing, and sketch conversion for the web application. Key functionalities:
+
+- Flask Configuration
+  - Sets up upload folder (static/uploads) with a 16MB file size limit.
+  - Uses secure_filename to sanitize uploaded filenames.
+
+- Core Functions
+  - image_to_base64(): Converts OpenCV images to base64 for web display.
+  - convert_to_sketch(): Implements the 5-step pencil sketch algorithm:
+    - Grayscale conversion → Inversion → Gaussian blur → Re-inversion → Blending.
+
+- API Endpoints
+  - /: Serves the HTML interface (index.html).
+  - /convert: Accepts image uploads, processes them, and returns JSON with:
+    - Base64-encoded intermediate steps (grayscale, inverted, blurred).
+    - Final pencil sketch result.
+    - Error handling for invalid uploads.
+
+- Cleanup
+- Automatically deletes uploaded files after processing to save space.
+- Execution
+  - Runs in debug mode for development (app.run(debug=True)).
+- Dependencies: Flask (web framework), OpenCV (image processing), NumPy (array operations).
+- Role: Acts as the bridge between the user-facing UI and the OpenCV sketch algorithm, ensuring secure and efficient image processing.
+
+## Download & Execution (git bash)
+- Clone the Repository
+  - git clone https://github.com/Walgama123/image-sketch-app.git
+  - cd image-sketch-app
+- Install Dependencies
+  - pip install -r requirements.txt
+- Run the Flask App
+  - python app.py
+- Open in Browser
+  - http://localhost:5000
+- Upload & Convert!
+  - Click "Select Image" to upload a photo.
+  - Click "Convert" to generate the pencil sketch.
+  - Click "Download Sketch" to save the result.
+
+## Requirements File (requirements.txt)
+<div align="center">
+	<img src="/image-sketch-app/images/Requirment.png">
+</div>
+
+## Future Improvements
+  - Multiple sketch styles (charcoal, watercolor)
+  - Batch processing (convert multiple images at once)
+  - User accounts to save sketches
+  
+## Credits
+- OpenCV for image processing
+- Flask for the web backend
+- LGMVIP for the original project idea
+
+
