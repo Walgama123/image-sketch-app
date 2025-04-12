@@ -1,0 +1,17 @@
+Image to Pencil Sketch
+
+
+Assignment
+Select an image in RGB format and use the OpenCV Python library to transform it so that it resembles a pencil sketch.
+
+Tips
+
+Convert the RGB image to grayscale - this will turn the image into a classic black-and-white photo;
+Invert the grayscale image - this is sometimes referred to as a negative image and can be used to enhance details;
+Mix the grayscale image with the inverted blurry image - this can be done by dividing the pixel values of the grayscale image by the pixel values of the inverted blurry image; the result should resemble a pencil sketch;
+Experiment by applying other transformations offered by the OpenCV library to improve the effect;
+Data Description
+We are providing you with a sample image of a dog, however, you can choose any colored image you want to complete this project.
+
+Practicalities
+Make sure that the solution reflects your entire thought process - it is more important how the code is structured rather than the final files.

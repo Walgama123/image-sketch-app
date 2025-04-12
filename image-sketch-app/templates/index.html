@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Pencil Sketch Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Image to Pencil Sketch Converter</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            <button id="selectBtn" class="btn">Select Image</button>
+            <button id="convertBtn" class="btn">Convert</button>
+            <button id="downloadBtn" class="btn">Download Sketch</button>
+        </div>
+        
+        <div class="image-display">
+            <div class="image-container">
+                <h3>Original</h3>
+                <img id="originalImage" src="#" alt="Original Image">
+            </div>
+            
+            <div class="processing-steps">
+                <div class="step">
+                    <h3>Grayscale</h3>
+                    <img id="grayImage" src="#" alt="Grayscale Image">
+                </div>
+                <div class="step">
+                    <h3>Inverted</h3>
+                    <img id="invertedImage" src="#" alt="Inverted Image">
+                </div>
+                <div class="step">
+                    <h3>Blurred</h3>
+                    <img id="blurredImage" src="#" alt="Blurred Image">
+                </div>
+                <div class="step">
+                    <h3>Inverted Blurred</h3>
+                    <img id="invertedBlurredImage" src="#" alt="Inverted Blurred Image">
+                </div>
+            </div>
+            
+            <div class="result-container">
+                <h3>Pencil Sketch Result</h3>
+                <img id="sketchResult" src="#" alt="Pencil Sketch Result">
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
